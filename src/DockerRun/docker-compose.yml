@@ -1,0 +1,17 @@
+services:
+  n8n-Onfly:
+    image: n8nio/n8n
+    ports:
+      - "5678:5678"
+    volumes:
+      - ./:/home/node/.n8n
+      - ./customNo:/home/node/.n8n/custom/customNo
+    environment:
+      GENERIC_TIMEZONE: America/Sao_Paulo
+    restart: unless-stopped
+    networks:
+      - n8n-network
+
+networks:
+  n8n-network:
+    driver: bridge

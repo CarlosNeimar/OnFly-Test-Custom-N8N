@@ -8,7 +8,7 @@ import type {
 import { NodeConnectionType } from 'n8n-workflow'; // Enum para tipos de conexão (entrada/saída)
 
 // Declara a classe do nó, que deve implementar a interface INodeType
-export class RandomNode implements INodeType {
+export class Random implements INodeType {
   // 'description' contém todas as informações que o n8n usa para renderizar o nó na interface
   description: INodeTypeDescription = {
     displayName: 'Random', // Nome de exibição do nó na UI
