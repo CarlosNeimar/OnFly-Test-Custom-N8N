@@ -1,17 +1,87 @@
-services:
-  n8n-Onfly:
-    image: n8nio/n8n
-    ports:
-      - "5678:5678"
-    volumes:
-      - ./:/home/node/.n8n
-      - ./customNo:/home/node/.n8n/custom/customNo
+# Especifica a versão da sintaxe do arquivo Docker Compose
+version: '3.7'
+
+
+# Declara os volumes
+volumes:
+  # Cria um volume chamado 'n8n_data' para guardar os arquivos de configuração do n8n
+  n8n_data:
+  # Cria um volume chamado 'postgres_data' para guardar os dados do banco de dados
+  postgres_data:
+
+# Declara as redes virtuais que os nossos containers usarão para se comunicar
+networks:
+  # Cria uma rede chamada 'n8n-network'
+  n8n-network:
+    # O driver 'bridge' é o padrão e cria uma rede privada para os containers
+    driver: bridge
+
+# Define a lista de todos os containers (serviços) que compõem nossa aplicação
+services:  
+  # Define o primeiro serviço e o nomeia como 'postgres'
+  postgres:
+    # Especifica a imagem Docker que será usada para criar o container
+    image: postgres:15
+    # o container sempre que ele parar, seja por erro ou reinicialização do sistema
+    restart: always
+    # Define as variáveis de ambiente que serão passadas para dentro do container
     environment:
-      GENERIC_TIMEZONE: America/Sao_Paulo
-    restart: unless-stopped
+      # Define o nome de usuário padrão do banco de dados
+      - POSTGRES_USER=n8n
+      # Define a senha para esse usuário
+      - POSTGRES_PASSWORD=root
+      # Define o nome do banco de dados que será criado
+      - POSTGRES_DB=n8n
+    # Monta os volumes dentro do container
+    volumes:
+      # Mapeia o volume nomeado 'postgres_data' para a pasta interna do container 
+      # onde o PostgreSQL armazena seus dados. Isso garante que os dados persistam
+      - postgres_data:/var/lib/postgresql/data
+    # Conecta este serviço à rede que definimos anteriormente
     networks:
       - n8n-network
 
-networks:
-  n8n-network:
-    driver: bridge
+  # Define o segundo serviço, o n8n
+  n8n:
+    # Especifica a imagem do n8n
+    image: n8nio/n8n:latest
+    # Define a mesma política de reinicialização 'always'
+    restart: always
+    # Mapeia as portas da máquina e o container
+    ports:
+      # Expõe a porta 5678 do container
+      # Acesse o n8n no navegador via http://localhost:5678
+      - "5678:5678"
+    # Define as dependências entre os serviços
+    depends_on:
+      # Garante que o serviço 'postgres' seja iniciado ANTES do serviço 'n8n',
+      # evitando erros de conexão do n8n com um banco de dados que ainda não está pronto
+      - postgres
+    # Define as variáveis de ambiente para configurar o n8n
+    environment:
+      # Informa ao n8n que o tipo de banco de dados a ser usado é PostgreSQL
+      - DB_TYPE=postgresdb
+      # O endereço do banco de dados. 'postgres' é o nome do serviço que definimos acima
+      - DB_POSTGRESDB_HOST=postgres
+      # A porta padrão do PostgreSQL
+      - DB_POSTGRESDB_PORT=5432
+      # O nome do banco de dados a ser usado
+      - DB_POSTGRESDB_DATABASE=n8n
+      # O nome de usuário para acessar o banco
+      - DB_POSTGRESDB_USER=n8n
+      # A senha para acessar o banco
+      - DB_POSTGRESDB_PASSWORD=root
+
+      # Habilita o carregamento de nós customizados a partir de pacotes npm externos
+      - NODE_FUNCTION_ALLOW_EXTERNAL='*'
+      
+      - GENERIC_TIMEZONE=America/Sao_Paulo
+    volumes:
+      # Mapeia o volume nomeado 'n8n_data' para a pasta de dados do n8n, 
+      - n8n_data:/home/node/.n8n
+      # Mapeia a pasta atual do projeto (onde está o docker-compose.yml) para a
+      # subpasta 'custom' dentro do n8n. Aqui está o nó customizado (RandomNode)
+      - ./:/home/node/.n8n/custom
+    # Conecta o serviço 'n8n' à mesma rede para que ele possa se comunicar com o 'postgres'
+    networks:
+      - n8n-network
