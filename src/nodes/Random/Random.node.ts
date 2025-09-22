@@ -82,15 +82,18 @@ export class Random implements INodeType {
         // Adiciona o item recém-processado ao array de dados de retorno
         returnData.push(newItem);
 
+// ...
       } catch (error) {
         // Bloco 'catch' para tratamento de erros que possam ocorrer no 'try'
         // Verifica se a opção "Continue on Fail" está habilitada nas configurações do nó
         if (this.continueOnFail()) {
+          // Assegura que 'error' é um objeto Error para acessar a propriedade 'message'
+          const errorMessage = (error as Error).message;
           // Se estiver, cria um item de saída com a mensagem de erro
           const newItem = {
             json: {
               ...items[itemIndex].json, // Mantém os dados originais
-              error: error.message, // Adiciona uma chave 'error' com a descrição do erro
+              error: errorMessage, // Adiciona uma chave 'error' com a descrição do erro
             },
             pairedItem: {
               item: itemIndex,
@@ -104,6 +107,7 @@ export class Random implements INodeType {
         // Se "Continue on Fail" não estiver habilitado, lança o erro, interrompendo o workflow
         throw error;
       }
+// ...
     }
     // Retorna os dados processados encapsulados em um array. É o formato esperado pelo n8n
     return [returnData];

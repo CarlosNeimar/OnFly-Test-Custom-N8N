@@ -84,12 +84,15 @@ O nó **Random** oferece as seguintes funcionalidades:
 Antes de começar, você precisará ter as seguintes ferramentas instaladas em sua máquina:
 
 ## 🖥️ Requisitos do Sistema
+## Tabela de Dependências do Projeto
 
 | Ferramenta | Versão Mínima | Link de Download | Verificação |
 |------------|---------------|------------------|-------------|
 | **Git** | `2.0+` | [Download Git](https://git-scm.com) | `git --version` |
 | **Docker** | `20.0+` | [Docker Desktop](https://www.docker.com/products/docker-desktop/) | `docker --version` |
 | **Docker Compose** | `2.0+` | *Já incluído no Docker Desktop* | `docker-compose --version` |
+| **Node.js** | `16.0+` | [Download Node.js](https://nodejs.org/en/download/) | `node --version` |
+| **npm** | `8.0+` | *Já incluído no Node.js* | `npm --version` |
 
 ## 🔍 Verificação dos Pré-requisitos
 
