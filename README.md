@@ -312,6 +312,18 @@ Modifique o nó **Random** para usar expressões que leiam os dados do nó anter
 - O resultado deverá ser um número aleatório entre 50 e 150
 - Isso confirma que seu nó se integra perfeitamente a outros nós em um fluxo de trabalho
 
+🤖 Uso como Ferramenta de IA
+
+Além de ser um nó em um workflow padrão, o nó Random foi projetado para ser usado como uma ferramenta de IA no n8n. Isso significa que modelos de linguagem (LLMs) podem invocar e executar o nó de forma autônoma.
+
+Cenários de Uso com IA
+
+    Tomada de decisão aleatória: Um LLM pode usar esta ferramenta para simular uma "escolha" aleatória dentro de um processo.
+
+    Geração de dados de teste: A IA pode gerar dados aleatórios para preencher formulários, simular cenários de teste ou criar conteúdo dinâmico.
+
+    Simulação de sorteios ou jogos: O nó pode ser invocado para simular um evento aleatório em um jogo de texto ou um sorteio virtual, adicionando um elemento de imprevisibilidade ao comportamento da IA.
+
 ## ✅ Validações de Teste
 
 Execute múltiplas vezes e verifique:
