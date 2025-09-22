@@ -64,7 +64,7 @@ O nó **Random** oferece as seguintes funcionalidades:
 - ✅ **Suporte a entradas dinâmicas** de nós anteriores
 - ✅ **Validação de parâmetros** e tratamento de erros
 - ✅ **Interface visual** com ícone personalizado
-
+- ✅ **Suporte para IA** como tool
 
 # <img src="./assets/gif/TechUsada.gif" width="40" valign="middle"/> Tecnologias Utilizadas
 
