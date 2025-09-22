@@ -1,7 +1,7 @@
 {
   "name": "n8n-nodes-random",
   "version": "0.1.0",
-  "description": "",
+  "description": "Nó customizado para gerar números aleatórios no n8n",
   "keywords": [
     "n8n-community-node-package"
   ],
@@ -20,7 +20,7 @@
   },
   "main": "index.js",
   "scripts": {
-    "build": "npx rimraf dist && tsc && gulp build:icons",
+    "build": "npx rimraf dist && tsc && npx copyfiles -u 1 \"src/nodes/**/*.svg\" dist",
     "dev": "tsc --watch",
     "format": "prettier nodes credentials --write",
     "lint": "eslint nodes credentials package.json",
@@ -37,14 +37,22 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.20",
+    "@types/node": "^20.19.17",
     "@typescript-eslint/parser": "~8.32.0",
+    "copyfiles": "^2.4.1",
     "eslint": "^8.57.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.3",
     "gulp": "^5.0.0",
     "prettier": "^3.5.3",
+    "rimraf": "^5.0.5",
     "typescript": "^5.8.2"
   },
   "peerDependencies": {
     "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "n8n-core": "*",
+    "n8n-nodes-base": "*"
   }
 }
