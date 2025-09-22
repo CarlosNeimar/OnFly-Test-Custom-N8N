@@ -288,7 +288,6 @@ Na interface do n8n (`http://localhost:5678`), clique em **"Add workflow"** para
   "randomNumber": 247,
   "min": 10,
   "max": 500,
-  "timestamp": "2024-XX-XX T XX:XX:XX.XXXZ"
 }
 ```
 
@@ -419,7 +418,7 @@ Desenvolvido por **Carlos Neimar** como parte do desafio técnico OnFly.
 
 📧 **E-mail**: carlos.areas@sga.pucminas.br  
 🐙 **GitHub**: [@CarlosNeimar](https://github.com/CarlosNeimar)  
-🔗 **LinkedIn**: [Carlos Neimar](https://linkedin.com/in/carlosneimar)  
+🔗 **LinkedIn**: [Carlos Neimar](https://www.linkedin.com/in/carlos-henrique-neimar-areas-141a092a9?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app)  
 
 ---
 
